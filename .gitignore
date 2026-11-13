@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+
+seguridad/respaldos/archivos/
+
+__pycache__/
+*.pyc
+
+.vscode/
+
+.venv/
+seleccion_sgbd/pruebas/docker-compose.pruebas.yml

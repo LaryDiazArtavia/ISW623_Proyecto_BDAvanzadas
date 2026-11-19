@@ -101,3 +101,28 @@ La validación de reproducibilidad realizada hasta ahora corresponde al dashboar
 ## Documentación final
 
 La entrega final incorporará las instrucciones completas para levantar el entorno integrado, las evidencias de ejecución, el informe técnico, la hoja de decisiones y los materiales de demostración.
+## Data Warehouse y OLAP
+
+Se implementó un esquema estrella en PostgreSQL dentro del esquema `dw`.
+
+Componentes:
+- `dim_fecha`: dimensión temporal.
+- `dim_ruta`: origen y destino.
+- `dim_aeronave`: aeronave y capacidad.
+- `dim_clima`: condiciones meteorológicas.
+- `fact_vuelos`: tabla de hechos con las medidas operativas.
+
+Archivos:
+- `data_warehouse/sql/01_esquema_estrella.sql`: creación de tablas e índices.
+- `data_warehouse/sql/02_carga_pruebas.sql`: carga de datos sintéticos.
+- `data_warehouse/sql/03_cubo_olap.sql`: consultas ROLLUP, CUBE y vista materializada.
+- `data_warehouse/CONTRATO_DATOS.md`: especificación para la integración del ETL.
+
+Validaciones realizadas:
+- 1000 vuelos cargados correctamente.
+- Carga de prueba idempotente.
+- Cuadre de 56835 pasajeros y 25985 minutos de retraso.
+- ROLLUP y CUBE ejecutados.
+- Vista materializada creada y validada.
+
+La carga desde curated y la integración con Airflow siguen pendientes.

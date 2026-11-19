@@ -20,14 +20,16 @@ Es necesario identificar qué información debe protegerse para evitar accesos n
 
 ## 3. Medidas de seguridad
 
-Para proteger la información se aplicarán las siguientes medidas:
+Para proteger la información se implementaron y probaron las siguientes medidas:
 
-- Crear usuarios con permisos según sus funciones.
-- Evitar que los usuarios de consulta puedan modificar los datos.
-- Enmascarar los números de pasaporte.
-- Ocultar los nombres de pasajeros en los reportes públicos.
-- Utilizar información sintética durante el desarrollo.
-- Evitar publicar contraseñas y credenciales en GitHub.
+- Configuración de roles y permisos en PostgreSQL aplicando el principio de mínimo privilegio.
+- Restricción de modificaciones para los usuarios de consulta.
+- Enmascarado de nombres y números de pasaporte mediante una vista protegida en MongoDB.
+- Restricción del acceso a los datos personales originales según el rol del usuario.
+- Utilización de datos sintéticos durante las pruebas.
+- Ejecución de pruebas de respaldo y restauración con comprobación mediante checksum.
+
+Adicionalmente, se establece como medida de seguridad evitar la publicación de contraseñas y credenciales en el repositorio Git.
 
 ## 4. Ley N.º 8968
 

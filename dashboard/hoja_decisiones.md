@@ -5,15 +5,23 @@
 
 Analizar los resultados del dashboard para identificar posibles mejoras en la puntualidad, la ocupación y la planificación de los vuelos de la aerolínea regional.
 
+
 ## Hallazgo 1. Retrasos por ruta y horario
 
-El dashboard muestra diferencias en los minutos acumulados de retraso entre las cinco rutas analizadas.
+La ruta San José - Limón registró la mayor acumulación de retrasos, con 5455 minutos, seguida de San José - Quepos, con 5400 minutos.
 
-También se identificaron horarios con una mayor acumulación de retrasos, especialmente alrededor de las 10:00 y las 18:00.
+En cuanto a los horarios, las 10:00 presentaron la mayor acumulación de retrasos, con 4095 minutos, seguidas de las 18:00, con 4030 minutos.
+
+Estos resultados permiten identificar las rutas y los horarios que requieren mayor atención operativa.
 
 **Acción recomendada:**
 
-Revisar la programación de los vuelos en los horarios con mayores retrasos y evaluar ajustes en los tiempos de salida y en la disponibilidad de aeronaves y tripulación.
+Revisar la programación de vuelos en las rutas y horarios con mayores retrasos, evaluar ajustes en los tiempos de salida y mejorar la disponibilidad de aeronaves y tripulación.
+
+**Limitación:**
+
+Los resultados corresponden a datos sintéticos. Los retrasos acumulados también dependen de la cantidad de vuelos, por lo que deben analizarse junto con los promedios antes de tomar decisiones definitivas.
+
 
 ## Hallazgo 2. Ocupación de las rutas
 

@@ -1,0 +1,85 @@
+{
+  "original_id": 29,
+  "name": "Ocupación promedio por ruta",
+  "description": null,
+  "query_type": "native",
+  "dataset_query": {
+    "database": 2,
+    "type": "native",
+    "native": {
+      "template-tags": {
+        "ruta": {
+          "type": "dimension",
+          "name": "ruta",
+          "id": "8468935e-1940-4305-a03c-ea0fda4316ba",
+          "display-name": "Ruta",
+          "default": null,
+          "dimension": [
+            "field",
+            74,
+            null
+          ],
+          "widget-type": "string/=",
+          "options": null
+        },
+        "fecha": {
+          "type": "dimension",
+          "name": "fecha",
+          "id": "d1b5ace0-035c-45fe-8f09-4f22b2f02f07",
+          "display-name": "Fecha",
+          "default": null,
+          "dimension": [
+            "field",
+            72,
+            null
+          ],
+          "widget-type": "date/month-year",
+          "options": null
+        }
+      },
+      "query": "SELECT\n    ruta,\n    COUNT(*) AS total_vuelos,\n    SUM(pasajeros) AS total_pasajeros,\n    ROUND(\n        SUM(pasajeros) * 100.0 / SUM(capacidad),\n        2\n    ) AS ocupacion_porcentaje\nFROM dashboard_pruebas.vuelos\nWHERE 1 = 1\n[[AND {{ruta}}]]\n[[AND {{fecha}}]]\nGROUP BY ruta\nORDER BY ocupacion_porcentaje DESC;\n"
+    }
+  },
+  "display": "bar",
+  "visualization_settings": {
+    "series_settings": {
+      "ocupacion_porcentaje": {
+        "color": "#87BCEC"
+      }
+    },
+    "graph.dimensions": [
+      "ruta"
+    ],
+    "graph.metrics": [
+      "ocupacion_porcentaje"
+    ]
+  },
+  "parameters": [
+    {
+      "id": "8468935e-1940-4305-a03c-ea0fda4316ba",
+      "type": "string/=",
+      "target": [
+        "dimension",
+        [
+          "template-tag",
+          "ruta"
+        ]
+      ],
+      "name": "Ruta",
+      "slug": "ruta"
+    },
+    {
+      "id": "d1b5ace0-035c-45fe-8f09-4f22b2f02f07",
+      "type": "date/month-year",
+      "target": [
+        "dimension",
+        [
+          "template-tag",
+          "fecha"
+        ]
+      ],
+      "name": "Fecha",
+      "slug": "fecha"
+    }
+  ]
+}

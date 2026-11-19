@@ -125,14 +125,30 @@ Cada tecnología cumple una función diferente dentro de la plataforma de datos.
 
 ## 7. Limitaciones
 
-- Las mediciones corresponden a una ejecución inicial.
+- Las mediciones corresponden a una ejecución inicial con datos sintéticos.
 - No se realizaron pruebas de escalabilidad.
-- Los tiempos internos de PostgreSQL y MongoDB no son directamente equivalentes.
-- La medición de Kafka no incluye el consumo ni el procesamiento posterior de los eventos.
-- Las calificaciones ponderadas todavía deben justificarse con evidencia.
+- Los tiempos de PostgreSQL y MongoDB no son directamente equivalentes porque utilizan motores y mecanismos de medición diferentes.
+- La medición de Kafka contempla la publicación de eventos, pero no el consumo ni su procesamiento posterior.
+- Las puntuaciones de integración, escalabilidad, seguridad y administración son valoraciones técnicas preliminares, no mediciones experimentales.
+- Los resultados deberán revisarse durante la integración final del proyecto.
+
 
 ## 8. Conclusión
 
-PostgreSQL, MongoDB y Kafka se utilizan para resolver necesidades distintas del proyecto.
+La matriz ponderada obtuvo los siguientes resultados:
 
-La conclusión definitiva se establecerá después de completar la matriz ponderada y analizar las mediciones y características de cada tecnología.
+- PostgreSQL: 4.05 puntos.
+- MongoDB: 4.00 puntos.
+- Kafka: 3.95 puntos.
+
+PostgreSQL obtuvo la puntuación más alta y se seleccionó para almacenar los datos relacionales y construir el Data Warehouse, debido a su capacidad para manejar relaciones, restricciones y consultas SQL.
+
+MongoDB se seleccionó para almacenar reservas y pasajeros mediante documentos anidados, ya que permite representar información semiestructurada.
+
+Kafka se seleccionó para transmitir eventos de vuelos en tiempo real. Durante las pruebas permitió publicar 10000 eventos en 3.318 segundos.
+
+Las diferencias entre las puntuaciones no representan una clasificación absoluta de rendimiento, porque las tecnologías tienen propósitos diferentes y las pruebas no son directamente comparables.
+
+Por lo tanto, se justifica utilizar PostgreSQL, MongoDB y Kafka de forma complementaria dentro de la arquitectura del proyecto.
+
+La selección se considera adecuada para las necesidades definidas, aunque deberá validarse nuevamente durante la integración completa.

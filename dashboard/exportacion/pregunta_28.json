@@ -1,0 +1,82 @@
+{
+  "original_id": 28,
+  "name": "Retrasos acumulados por hora",
+  "description": null,
+  "query_type": "native",
+  "dataset_query": {
+    "database": 2,
+    "type": "native",
+    "native": {
+      "template-tags": {
+        "ruta": {
+          "type": "dimension",
+          "name": "ruta",
+          "id": "8afbbf5d-0598-46bf-9c84-ed0ba3c18e32",
+          "display-name": "Ruta",
+          "default": null,
+          "dimension": [
+            "field",
+            74,
+            null
+          ],
+          "widget-type": "string/=",
+          "options": null
+        },
+        "fecha": {
+          "type": "dimension",
+          "name": "fecha",
+          "id": "76a652cb-e2e5-4bdf-8dbe-5ec354fc946b",
+          "display-name": "Fecha",
+          "default": null,
+          "dimension": [
+            "field",
+            72,
+            null
+          ],
+          "widget-type": "date/month-year",
+          "options": null
+        }
+      },
+      "query": "SELECT\n    EXTRACT(HOUR FROM hora)::INTEGER AS hora_vuelo,\n    SUM(retraso_minutos) AS retraso_total\nFROM dashboard_pruebas.vuelos\nWHERE 1 = 1\n[[AND {{ruta}}]]\n[[AND {{fecha}}]]\nGROUP BY EXTRACT(HOUR FROM hora)\nORDER BY hora_vuelo;\n"
+    }
+  },
+  "display": "bar",
+  "visualization_settings": {
+    "graph.dimensions": [
+      "hora_vuelo"
+    ],
+    "graph.series_order_dimension": null,
+    "graph.series_order": null,
+    "graph.metrics": [
+      "retraso_total"
+    ]
+  },
+  "parameters": [
+    {
+      "id": "8afbbf5d-0598-46bf-9c84-ed0ba3c18e32",
+      "type": "string/=",
+      "target": [
+        "dimension",
+        [
+          "template-tag",
+          "ruta"
+        ]
+      ],
+      "name": "Ruta",
+      "slug": "ruta"
+    },
+    {
+      "id": "76a652cb-e2e5-4bdf-8dbe-5ec354fc946b",
+      "type": "date/month-year",
+      "target": [
+        "dimension",
+        [
+          "template-tag",
+          "fecha"
+        ]
+      ],
+      "name": "Fecha",
+      "slug": "fecha"
+    }
+  ]
+}

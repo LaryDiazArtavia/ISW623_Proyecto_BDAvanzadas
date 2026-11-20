@@ -90,17 +90,47 @@ Se implementaron y probaron:
 
 También se documentaron la clasificación de datos, las consideraciones de la Ley N.º 8968 de Costa Rica y la política de retención.
 
+
 ## Estado del proyecto
 
-Se han desarrollado los módulos de selección de SGBD, seguridad y dashboard utilizando datos sintéticos de prueba.
+### Componentes desarrollados por Lary
 
-La plataforma integrada todavía está en desarrollo. Quedan pendientes las fuentes definitivas, la ingesta, la calidad de datos, el Data Warehouse dimensional, la orquestación con Airflow y el cubo OLAP.
+- Selección de SGBD mediante matriz ponderada y pruebas de rendimiento.
+- Seguridad en PostgreSQL y MongoDB, incluyendo roles, permisos y enmascarado.
+- Respaldo y restauración de PostgreSQL con verificación SHA-256.
+- Clasificación de datos, Ley N.º 8968 y política de retención.
+- Dashboard de Metabase con cinco gráficos, dos filtros y hoja de decisiones.
+- Data Warehouse dimensional con cuatro dimensiones y una tabla de hechos.
+- Identificador único de operación y hora de salida de vuelos.
+- Carga de prueba idempotente con 1000 vuelos sintéticos.
+- Consultas OLAP mediante ROLLUP y CUBE.
+- Vista materializada con totales validados.
+- Contrato de datos para la integración posterior.
 
-La validación de reproducibilidad realizada hasta ahora corresponde al dashboard y a sus componentes de prueba. No constituye todavía una prueba de ejecución completa de la plataforma.
+### Componentes pendientes de Kristel
+
+- Generador de datos sintéticos y cuatro fuentes de información.
+- Ingesta mediante NiFi hacia MinIO.
+- Procesamiento de calidad con al menos seis reglas.
+- Generación de datos curated en Parquet y registros rejected.
+- ETL definitivo desde curated hacia el Data Warehouse.
+- DAG de Airflow con cuatro tareas.
+- Docker Compose integrado e instrucciones de ejecución desde cero.
+
+### Pendientes de integración conjunta
+
+- Validar el Data Warehouse con los datos definitivos.
+- Adaptar el dashboard a las fuentes integradas.
+- Comprobar la ejecución completa desde cero.
+- Consolidar el informe técnico y preparar la demostración.
+
+Los componentes de Lary se probaron de forma independiente con datos sintéticos. Estas pruebas no sustituyen la validación completa de la plataforma integrada.
+
 
 ## Documentación final
 
 La entrega final incorporará las instrucciones completas para levantar el entorno integrado, las evidencias de ejecución, el informe técnico, la hoja de decisiones y los materiales de demostración.
+
 ## Data Warehouse y OLAP
 
 Se implementó un esquema estrella en PostgreSQL dentro del esquema `dw`.
@@ -116,6 +146,7 @@ Archivos:
 - `data_warehouse/sql/01_esquema_estrella.sql`: creación de tablas e índices.
 - `data_warehouse/sql/02_carga_pruebas.sql`: carga de datos sintéticos.
 - `data_warehouse/sql/03_cubo_olap.sql`: consultas ROLLUP, CUBE y vista materializada.
+- `data_warehouse/sql/04_ajuste_operaciones.sql`: migración del esquema anterior para incorporar identificador operativo y hora de salida.
 - `data_warehouse/CONTRATO_DATOS.md`: especificación para la integración del ETL.
 
 Validaciones realizadas:

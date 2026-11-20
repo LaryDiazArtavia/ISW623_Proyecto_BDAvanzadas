@@ -37,12 +37,15 @@ SELECT DISTINCT clima
 FROM dashboard_pruebas.vuelos
 ON CONFLICT (condicion) DO NOTHING;
 
+
 INSERT INTO dw.fact_vuelos (
+    id_operacion,
     codigo_vuelo,
     fecha_key,
     ruta_key,
     aeronave_key,
     clima_key,
+    hora_salida,
     pasajeros,
     capacidad,
     retraso_minutos,
@@ -50,10 +53,12 @@ INSERT INTO dw.fact_vuelos (
 )
 SELECT
     'VUELO-' || v.vuelo_id,
+    'VL-' || v.vuelo_id,
     f.fecha_key,
     r.ruta_key,
     a.aeronave_key,
     c.clima_key,
+    v.hora,
     v.pasajeros,
     v.capacidad,
     v.retraso_minutos,
@@ -63,4 +68,4 @@ JOIN dw.dim_fecha f ON f.fecha = v.fecha
 JOIN dw.dim_ruta r ON r.codigo_ruta = v.ruta
 JOIN dw.dim_aeronave a ON a.codigo_aeronave = 'TIPO-' || v.capacidad
 JOIN dw.dim_clima c ON c.condicion = v.clima
-ON CONFLICT (codigo_vuelo) DO NOTHING;
+ON CONFLICT (id_operacion) DO NOTHING;

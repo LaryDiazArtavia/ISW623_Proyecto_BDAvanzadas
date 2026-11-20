@@ -23,13 +23,20 @@ Tablas:
 
 La tabla `dw.fact_vuelos` almacena una fila por operación de vuelo.
 
-El campo `codigo_vuelo` debe identificar de forma única cada operación, incluso cuando un número de vuelo comercial se repita en diferentes fechas.
+- `vuelo_key`: clave sustituta generada por PostgreSQL.
+- `id_operacion`: identificador único y obligatorio de cada operación.
+- `codigo_vuelo`: código comercial del vuelo; puede repetirse en distintas fechas.
+- `hora_salida`: hora de salida de la operación, utilizada para analizar retrasos por horario.
+
+La unicidad de los registros se controla mediante `id_operacion`, no mediante `codigo_vuelo`.
 
 ## Campos requeridos desde curated
 
 | Campo | Tipo esperado | Destino |
 |---|---|---|
-| codigo_vuelo | Texto único | fact_vuelos.codigo_vuelo |
+| id_operacion | Texto único y obligatorio | fact_vuelos.id_operacion |
+| codigo_vuelo | Texto; admite repeticiones | fact_vuelos.codigo_vuelo |
+| hora_salida | TIME | fact_vuelos.hora_salida |
 | fecha | DATE | dim_fecha |
 | codigo_ruta | Texto | dim_ruta.codigo_ruta |
 | origen | Texto | dim_ruta.origen |
@@ -48,13 +55,13 @@ Los campos deben cumplir las restricciones del esquema SQL.
 1. Cargar primero las dimensiones.
 2. Buscar las claves sustitutas correspondientes a cada registro.
 3. Cargar después la tabla `dw.fact_vuelos`.
-4. Evitar duplicados mediante la clave única `codigo_vuelo`.
+4. Evitar duplicados mediante la clave única `id_operacion`. El código comercial `codigo_vuelo` puede repetirse.
 5. Validar el total de vuelos y las medidas contra curated.
 6. Refrescar `dw.mv_resumen_vuelos` después de completar y validar la carga.
 
 ## Idempotencia
 
-La carga de prueba utiliza `ON CONFLICT DO NOTHING`.
+La carga de prueba utiliza `ON CONFLICT (id_operacion) DO NOTHING`.
 
 Para la integración definitiva, el ETL deberá definir si los registros existentes se mantienen o actualizan cuando cambien sus medidas. En ambos casos, ejecutar repetidamente la carga no debe producir duplicados.
 
@@ -82,6 +89,7 @@ No se deben sumar promedios ni porcentajes directamente.
 - `sql/01_esquema_estrella.sql`: definición de dimensiones y hechos.
 - `sql/02_carga_pruebas.sql`: carga sintética independiente utilizada para validación.
 - `sql/03_cubo_olap.sql`: consultas ROLLUP, CUBE y vista materializada.
+- `sql/04_ajuste_operaciones.sql`: migración del esquema anterior para incorporar el identificador operativo y la hora de salida.
 
 El archivo de carga de pruebas no sustituye al ETL definitivo desde curated.
 
@@ -103,3 +111,4 @@ El archivo de carga de pruebas no sustituye al ETL definitivo desde curated.
 - Integrar el DAG de Airflow.
 - Ejecutar la validación completa con las fuentes del grupo.
 - Conectar o adaptar el dashboard a los datos definitivos.
+- Verificar que los identificadores de operaciones, rutas y aeronaves de las fuentes definitivas coincidan con el contrato de datos.

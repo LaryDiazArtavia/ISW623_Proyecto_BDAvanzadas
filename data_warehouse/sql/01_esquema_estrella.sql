@@ -32,11 +32,13 @@ CREATE TABLE IF NOT EXISTS dw.dim_clima (
 
 CREATE TABLE IF NOT EXISTS dw.fact_vuelos (
     vuelo_key BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    codigo_vuelo VARCHAR(50) NOT NULL UNIQUE,
+    id_operacion VARCHAR(80) NOT NULL UNIQUE,
+    codigo_vuelo VARCHAR(50) NOT NULL,
     fecha_key INTEGER NOT NULL REFERENCES dw.dim_fecha(fecha_key),
     ruta_key INTEGER NOT NULL REFERENCES dw.dim_ruta(ruta_key),
     aeronave_key INTEGER NOT NULL REFERENCES dw.dim_aeronave(aeronave_key),
     clima_key INTEGER NOT NULL REFERENCES dw.dim_clima(clima_key),
+    hora_salida TIME NOT NULL,
     pasajeros INTEGER NOT NULL CHECK (pasajeros >= 0),
     capacidad INTEGER NOT NULL CHECK (capacidad > 0),
     retraso_minutos INTEGER NOT NULL CHECK (retraso_minutos >= 0),

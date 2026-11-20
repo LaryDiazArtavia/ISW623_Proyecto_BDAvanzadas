@@ -1,0 +1,221 @@
+{
+  "name": "Dashboard de Operaciones — Aerolínea Regional",
+  "description": null,
+  "parameters": [
+    {
+      "name": "Ruta",
+      "slug": "ruta",
+      "id": "66a8f57c",
+      "type": "string/=",
+      "sectionId": "string",
+      "isMultiSelect": false
+    },
+    {
+      "name": "Fecha",
+      "slug": "fecha",
+      "id": "43468a2c",
+      "type": "date/single",
+      "sectionId": "date"
+    }
+  ],
+  "tabs": [],
+  "dashcards": [
+    {
+      "card_id": 27,
+      "dashboard_tab_id": null,
+      "row": 0,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 6,
+      "parameter_mappings": [
+        {
+          "parameter_id": "66a8f57c",
+          "card_id": 27,
+          "target": [
+            "dimension",
+            [
+              "field",
+              74,
+              {
+                "base-type": "type/Text"
+              }
+            ]
+          ]
+        },
+        {
+          "parameter_id": "43468a2c",
+          "card_id": 27,
+          "target": [
+            "dimension",
+            [
+              "field",
+              72,
+              {
+                "base-type": "type/Date"
+              }
+            ]
+          ]
+        }
+      ],
+      "visualization_settings": {
+        "graph.dimensions": [
+          "ruta"
+        ],
+        "series_settings": {
+          "sum": {
+            "color": "#A7D07C"
+          }
+        },
+        "graph.metrics": [
+          "sum"
+        ]
+      }
+    },
+    {
+      "card_id": 28,
+      "dashboard_tab_id": null,
+      "row": 0,
+      "col": 12,
+      "size_x": 12,
+      "size_y": 6,
+      "parameter_mappings": [
+        {
+          "parameter_id": "66a8f57c",
+          "card_id": 28,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "ruta"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "43468a2c",
+          "card_id": 28,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "fecha"
+            ]
+          ]
+        }
+      ],
+      "visualization_settings": {
+        "graph.dimensions": [
+          "hora_vuelo"
+        ],
+        "graph.series_order_dimension": null,
+        "graph.series_order": null,
+        "series_settings": {
+          "retraso_total": {
+            "color": "#C8B4DA"
+          }
+        },
+        "graph.metrics": [
+          "retraso_total"
+        ]
+      }
+    },
+    {
+      "card_id": 29,
+      "dashboard_tab_id": null,
+      "row": 6,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 6,
+      "parameter_mappings": [
+        {
+          "parameter_id": "66a8f57c",
+          "card_id": 29,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "ruta"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "43468a2c",
+          "card_id": 29,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "fecha"
+            ]
+          ]
+        }
+      ],
+      "visualization_settings": {}
+    },
+    {
+      "card_id": 30,
+      "dashboard_tab_id": null,
+      "row": 6,
+      "col": 12,
+      "size_x": 12,
+      "size_y": 6,
+      "parameter_mappings": [
+        {
+          "parameter_id": "66a8f57c",
+          "card_id": 30,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "ruta"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "43468a2c",
+          "card_id": 30,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "fecha"
+            ]
+          ]
+        }
+      ],
+      "visualization_settings": {}
+    },
+    {
+      "card_id": 31,
+      "dashboard_tab_id": null,
+      "row": 12,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 6,
+      "parameter_mappings": [
+        {
+          "parameter_id": "66a8f57c",
+          "card_id": 31,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "ruta"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "43468a2c",
+          "card_id": 31,
+          "target": [
+            "dimension",
+            [
+              "template-tag",
+              "fecha"
+            ]
+          ]
+        }
+      ],
+      "visualization_settings": {}
+    }
+  ]
+}

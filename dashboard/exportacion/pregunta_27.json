@@ -1,0 +1,53 @@
+{
+  "original_id": 27,
+  "name": "Retrasos acumulados por ruta",
+  "description": null,
+  "query_type": "query",
+  "dataset_query": {
+    "database": 2,
+    "type": "query",
+    "query": {
+      "source-table": 9,
+      "aggregation": [
+        [
+          "sum",
+          [
+            "field",
+            78,
+            {
+              "base-type": "type/Integer"
+            }
+          ]
+        ]
+      ],
+      "breakout": [
+        [
+          "field",
+          74,
+          {
+            "base-type": "type/Text"
+          }
+        ]
+      ],
+      "order-by": [
+        [
+          "desc",
+          [
+            "aggregation",
+            0
+          ]
+        ]
+      ]
+    }
+  },
+  "display": "bar",
+  "visualization_settings": {
+    "graph.dimensions": [
+      "ruta"
+    ],
+    "graph.metrics": [
+      "sum"
+    ]
+  },
+  "parameters": []
+}

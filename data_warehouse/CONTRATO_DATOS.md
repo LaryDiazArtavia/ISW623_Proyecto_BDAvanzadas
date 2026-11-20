@@ -112,3 +112,30 @@ El archivo de carga de pruebas no sustituye al ETL definitivo desde curated.
 - Ejecutar la validación completa con las fuentes del grupo.
 - Conectar o adaptar el dashboard a los datos definitivos.
 - Verificar que los identificadores de operaciones, rutas y aeronaves de las fuentes definitivas coincidan con el contrato de datos.
+
+
+## Instrucciones para integrar con las fuentes definitivas
+
+Los identificadores utilizados en `02_carga_pruebas.sql`, como
+`VUELO-1`, `VL-1` y `TIPO-90`, son sintéticos y corresponden
+únicamente al entorno de pruebas de Lary.
+
+Para la integración definitiva:
+
+1. Utilizar `01_esquema_estrella.sql` para crear el esquema DW.
+2. Generar `id_operacion` de manera única y estable para cada operación de vuelo.
+3. Mantener `codigo_vuelo` como código comercial, permitiendo repeticiones.
+4. Conservar la fecha y la hora de salida de cada vuelo.
+5. Utilizar identificadores reales del conjunto sintético del grupo para rutas y aeronaves.
+6. Cargar dimensiones antes de cargar hechos.
+7. Verificar claves foráneas y restricciones de capacidad.
+8. Validar los totales contra curated.
+9. Refrescar la vista materializada después de validar la carga.
+
+No ejecutar `02_carga_pruebas.sql` durante la integración definitiva.
+Este archivo depende de `dashboard_pruebas.vuelos` y se utiliza
+únicamente para pruebas independientes.
+
+`04_ajuste_operaciones.sql` es una migración histórica para bases
+que utilizaron el diseño anterior; no se necesita en instalaciones
+nuevas que ejecuten el esquema actualizado.
